@@ -1,5 +1,4 @@
-﻿using BL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,17 +33,16 @@ namespace Desktop_App
 
         private void BtnCalc_Click(object sender, RoutedEventArgs e)
         {
-            Logic l = new Logic();
-            
-            // calling Bl from the dll of the API
-            string calcResult = l.Calculate(txbField1.Text,CmbOperator.Text,txbField2.Text).ToString();
+            // for API Call
+            AppBL appBL = new AppBL();
+            string calcResult = appBL.Calc(txbField1.Text, CmbOperator.Text, txbField2.Text);
             txtResult.Text = "Result: " + calcResult;
 
             // lest show to the user some history
             txtHistory.Visibility = Visibility.Visible;
             HistoryTable.Visibility = Visibility.Visible;
 
-            string countResult = l.GetCountThisMonth(CmbOperator.Text);
+            string countResult = appBL.GetCountThisMonth(CmbOperator.Text);
             txtCount.Text = "Total calculations for this operator since the start of the month: " + countResult;
 
             viewModel.LoadHistoryData(CmbOperator.Text);

@@ -1,5 +1,4 @@
-﻿using BL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -39,8 +38,8 @@ namespace Desktop_App
         public MainViewModel()
         {
             Operators = new ObservableCollection<string>();
-            Logic logic = new Logic();
-            List<string> ops = logic.GetOperatorsList();
+            AppBL appBL = new AppBL();
+            List<string> ops = appBL.GetOperatorList();
             foreach (string op in ops)
                 Operators.Add(op);
 
@@ -49,8 +48,8 @@ namespace Desktop_App
 
         public void LoadHistoryData(string op)
         {
-            Logic logic = new Logic();
-            DataTable data = logic.GetLast3Records(op);
+            AppBL appBL = new AppBL();
+            DataTable data = appBL.GetLast3Records(op);
 
             if (data!= null && data.Rows.Count > 0)
             {
